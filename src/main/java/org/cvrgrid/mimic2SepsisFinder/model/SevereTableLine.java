@@ -3,6 +3,7 @@ package org.cvrgrid.mimic2SepsisFinder.model;
 public class SevereTableLine extends SepsisTableLine {
 
 	private boolean BP, pH, lacticAcid, Severe;
+	private boolean BPNull, pHNull, lacticAcidNull;
 	
 	public SevereTableLine() {
 		
@@ -11,6 +12,9 @@ public class SevereTableLine extends SepsisTableLine {
 		setpH(false);
 		setLacticAcid(false);
 		setSevere(false);
+		setBPNull(false);
+		setpHNull(false);
+		setLacticAcidNull(false);
 		
 	}
 
@@ -47,6 +51,30 @@ public class SevereTableLine extends SepsisTableLine {
 		Severe = severe;
 	}
 	
+	public boolean isBPNull() {
+		return BPNull;
+	}
+
+	public void setBPNull(boolean bPNull) {
+		BPNull = bPNull;
+	}
+
+	public boolean ispHNull() {
+		return pHNull;
+	}
+
+	public void setpHNull(boolean pHNull) {
+		this.pHNull = pHNull;
+	}
+
+	public boolean isLacticAcidNull() {
+		return lacticAcidNull;
+	}
+
+	public void setLacticAcidNull(boolean lacticAcidNull) {
+		this.lacticAcidNull = lacticAcidNull;
+	}
+
 	private void checkSevere() {
 		
 		int count = 0;

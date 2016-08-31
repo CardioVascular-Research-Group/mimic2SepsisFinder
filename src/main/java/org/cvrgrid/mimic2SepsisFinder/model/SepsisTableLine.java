@@ -3,6 +3,7 @@ package org.cvrgrid.mimic2SepsisFinder.model;
 public class SepsisTableLine {
 
 	private boolean Temp, HR, RR, WBC, Simultaneous;
+	private boolean TempNull, HRNull, RRNull, WBCNull;
 	
 	public SepsisTableLine() {
 		
@@ -11,6 +12,10 @@ public class SepsisTableLine {
 		setRR(false);
 		setWBC(false);
 		setSimultaneous(false);
+		setTempNull(false);
+		setHRNull(false);
+		setRRNull(false);
+		setWBCNull(false);
 		
 	}
 
@@ -55,6 +60,38 @@ public class SepsisTableLine {
 		Simultaneous = simultaneous;
 	}
 	
+	public boolean isTempNull() {
+		return TempNull;
+	}
+
+	public void setTempNull(boolean tempNull) {
+		TempNull = tempNull;
+	}
+
+	public boolean isHRNull() {
+		return HRNull;
+	}
+
+	public void setHRNull(boolean hRNull) {
+		HRNull = hRNull;
+	}
+
+	public boolean isRRNull() {
+		return RRNull;
+	}
+
+	public void setRRNull(boolean rRNull) {
+		RRNull = rRNull;
+	}
+
+	public boolean isWBCNull() {
+		return WBCNull;
+	}
+
+	public void setWBCNull(boolean wBCNull) {
+		WBCNull = wBCNull;
+	}
+
 	private void checkSimultaneous() {
 		
 		int count = 0;

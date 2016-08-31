@@ -11,8 +11,8 @@ public class ChartEvents {
 	private String value2;
 	private String value2num;
 	private String value2uom;
-	private boolean sepsisFlag;
-	private boolean severeFlag;
+	private boolean sepsisFlag, sepsisFlagNull;
+	private boolean severeFlag, severeFlagNull;
 
 	public ChartEvents() {
 		setSubject_id("");
@@ -26,6 +26,8 @@ public class ChartEvents {
 		setValue2uom("");
 		setSepsisFlag(false);
 		setSevereFlag(false);
+		setSepsisFlagNull(false);
+		setSevereFlagNull(false);
 	}
 
 	public String getSubject_id() {
@@ -118,11 +120,27 @@ public class ChartEvents {
 		this.severeFlag = severeFlag;
 	}
 
+	public boolean isSepsisFlagNull() {
+		return sepsisFlagNull;
+	}
+
+	public void setSepsisFlagNull(boolean sepsisFlagNull) {
+		this.sepsisFlagNull = sepsisFlagNull;
+	}
+
+	public boolean isSevereFlagNull() {
+		return severeFlagNull;
+	}
+
+	public void setSevereFlagNull(boolean severeFlagNull) {
+		this.severeFlagNull = severeFlagNull;
+	}
+
 	private void sepsisCheck() {
-		if (!(value1.isEmpty() && value1num.isEmpty()))
+		if (!(value1.isEmpty() && value1num.isEmpty())) {
 			if (!(value1.equalsIgnoreCase("no data") || value1num.equalsIgnoreCase("no data") || 
 					value1.equalsIgnoreCase("error") || value1num.equalsIgnoreCase("error") || 
-					value1.equalsIgnoreCase("") || value1num.equalsIgnoreCase("")))
+					value1.equalsIgnoreCase("") || value1num.equalsIgnoreCase(""))) {
 				if (label.equalsIgnoreCase("Heart Rate")) {
 					if (new Double(value1).doubleValue() > 90 || new Double(value1num).doubleValue() > 90) {
 						setSepsisFlag(true);
@@ -153,13 +171,19 @@ public class ChartEvents {
 						setSepsisFlag(true);
 					}
 				}
+			} else {
+				setSepsisFlagNull(true);
+			}
+		} else {
+			setSepsisFlagNull(true);
+		}
 	}
 
 	private void severeCheck() {
-		if (!(value1.isEmpty() && value1num.isEmpty()))
+		if (!(value1.isEmpty() && value1num.isEmpty())) {
 			if (!(value1.equalsIgnoreCase("no data") || value1num.equalsIgnoreCase("no data") || 
 					value1.equalsIgnoreCase("error") || value1num.equalsIgnoreCase("error") || 
-					value1.equalsIgnoreCase("") || value1num.equalsIgnoreCase("")))
+					value1.equalsIgnoreCase("") || value1num.equalsIgnoreCase(""))) {
 				if (label.equalsIgnoreCase("Arterial BP")) {
 					if (new Double(value1).doubleValue() < 90 || new Double(value1num).doubleValue() < 90) {
 						setSevereFlag(true);
@@ -173,5 +197,12 @@ public class ChartEvents {
 						setSevereFlag(true);
 					}
 				}
+			} else {
+				setSevereFlagNull(true);
+			}
+		} else {
+			setSevereFlagNull(true);
+		}
+
 	}	
 }

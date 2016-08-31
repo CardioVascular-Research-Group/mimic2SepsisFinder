@@ -3,12 +3,14 @@ package org.cvrgrid.mimic2SepsisFinder.model;
 public class ShockTableLine extends SevereTableLine {
 
 	private boolean fluid, Shock;
+	private boolean fluidNull;
 	
 	public ShockTableLine() {
 		
 		super();
 		setFluid(false);
 		setShock(false);
+		setFluidNull(false);
 		
 	}
 
@@ -31,6 +33,16 @@ public class ShockTableLine extends SevereTableLine {
 
 	public void setShock(boolean shock) {
 		Shock = shock;
+	}
+
+
+	public boolean isFluidNull() {
+		return fluidNull;
+	}
+
+
+	public void setFluidNull(boolean fluidNull) {
+		this.fluidNull = fluidNull;
 	}
 
 

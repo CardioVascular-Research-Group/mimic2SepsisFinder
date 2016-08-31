@@ -83,17 +83,22 @@ public class mimic2SepsisFinderFacade {
 				if (organizedInfo.containsKey(key)) line = organizedInfo.get(key);
 				ShockTableLine tempLine = new ShockTableLine();
 				if (line.containsKey((entry.getCharttime()))) tempLine = line.get(entry.getCharttime());
-				if (entry.isSepsisFlag())
+//				if (entry.isSepsisFlag())
 					if (entry.getLabel().equalsIgnoreCase("Heart Rate")) {
 						tempLine.setHR(entry.isSepsisFlag());
+						tempLine.setHRNull(entry.isSepsisFlagNull());
 					} else if (entry.getLabel().equalsIgnoreCase("Respiratory Rate")) {
 						tempLine.setRR(entry.isSepsisFlag());
+						tempLine.setRRNull(entry.isSepsisFlagNull());
 					} else if (entry.getLabel().startsWith("Arterial")) {
 						tempLine.setRR(entry.isSepsisFlag());
+						tempLine.setRRNull(entry.isSepsisFlagNull());
 					} else if (entry.getLabel().startsWith("Temperature")) {
 						tempLine.setTemp(entry.isSepsisFlag());
+						tempLine.setTempNull(entry.isSepsisFlagNull());
 					} else if (entry.getLabel().startsWith("WBC")) {
 						tempLine.setWBC(entry.isSepsisFlag());
+						tempLine.setWBCNull(entry.isSepsisFlagNull());
 					}
 				line.put(entry.getCharttime(), tempLine);
 			}
@@ -127,13 +132,16 @@ public class mimic2SepsisFinderFacade {
 				if (organizedInfo.containsKey(key)) line = organizedInfo.get(key);
 				ShockTableLine tempLine = new ShockTableLine();
 				if (line.containsKey((entry.getCharttime()))) tempLine = line.get(entry.getCharttime());
-				if (entry.isSevereFlag())
+//				if (entry.isSevereFlag())
 					if (entry.getLabel().equalsIgnoreCase("Arterial BP")) {
 						tempLine.setBP(entry.isSevereFlag());
+						tempLine.setBPNull(entry.isSevereFlagNull());
 					} else if (entry.getLabel().startsWith("Lactic Acid")) {
-						tempLine.setBP(entry.isSevereFlag());
+						tempLine.setLacticAcid(entry.isSevereFlag());
+						tempLine.setLacticAcidNull(entry.isSevereFlagNull());
 					} else if (entry.getLabel().startsWith("pH") || entry.getLabel().endsWith("pH")) {
-						tempLine.setBP(entry.isSevereFlag());
+						tempLine.setpH(entry.isSevereFlag());
+						tempLine.setpHNull(entry.isSevereFlagNull());
 					} 
 
 				line.put(entry.getCharttime(), tempLine);
@@ -163,9 +171,10 @@ public class mimic2SepsisFinderFacade {
 				if (organizedInfo.containsKey(key)) line = organizedInfo.get(key);
 				ShockTableLine tempLine = new ShockTableLine();
 				if (line.containsKey((entry.getCharttime()))) tempLine = line.get(entry.getCharttime());
-				if (entry.isShockFlag())
+//				if (entry.isShockFlag())
 					if (entry.getLabel().equalsIgnoreCase("24h Total In")) {
 						tempLine.setFluid(entry.isShockFlag());
+						tempLine.setFluidNull(entry.isShockFlagNull());
 					} 
 				line.put(entry.getCharttime(), tempLine);
 			}
@@ -190,7 +199,50 @@ public class mimic2SepsisFinderFacade {
 						if (!(subjectsWithSepsis.containsKey(convertSubjectId(key)))) subjectsWithSepsis.put(convertSubjectId(key),checkForSubjectDir(key));
 						if (!(subjectsWithSevere.contains(convertSubjectId(key))) && tempLine.isSevere()) subjectsWithSevere.add(convertSubjectId(key));
 						if (!(subjectsWithShock.contains(convertSubjectId(key))) && tempLine.isShock()) subjectsWithShock.add(convertSubjectId(key));
-						writer.write(key + ", " + key2 + ", " + tempLine.isHR() + ", " + tempLine.isRR() + ", " + tempLine.isTemp() + ", " + tempLine.isWBC() + ", " + tempLine.isSimultaneous() + ", " + tempLine.isBP() + ", " + tempLine.ispH() + ", " + tempLine.isLacticAcid() + ", " + tempLine.isSevere() + ", " + tempLine.isFluid() + ", " + tempLine.isShock() + "\r\n");
+						writer.write(key + ", " + key2 + ", ");
+						if (tempLine.isHRNull()) {
+							writer.write("null, ");
+						} else {
+							writer.write(tempLine.isHR() + ", ");
+						}
+						if (tempLine.isRRNull()) {
+							writer.write("null, ");
+						} else {
+							writer.write(tempLine.isRR() + ", ");
+						}
+						if (tempLine.isTempNull()) {
+							writer.write("null, ");
+						} else {
+							writer.write(tempLine.isTemp() + ", ");
+						}
+						if (tempLine.isWBCNull()) {
+							writer.write("null, ");
+						} else {
+							writer.write(tempLine.isWBC() + ", ");
+						}
+						writer.write(tempLine.isSimultaneous() + ", ");
+						if (tempLine.isBPNull()) {
+							writer.write("null, ");
+						} else {
+							writer.write(tempLine.isBP() + ", ");
+						}
+						if (tempLine.ispHNull()) {
+							writer.write("null, ");
+						} else {
+							writer.write(tempLine.ispH() + ", ");
+						}
+						if (tempLine.isLacticAcidNull()) {
+							writer.write("null, ");
+						} else {
+							writer.write(tempLine.isLacticAcid() + ", ");
+						}
+						writer.write(tempLine.isSevere() + ", ");
+						if (tempLine.isFluidNull()) {
+							writer.write("null, ");
+						} else {
+							writer.write(tempLine.isFluid() + ", ");
+						}
+						writer.write(tempLine.isShock() + "\r\n");
 					}
 				}
 			}

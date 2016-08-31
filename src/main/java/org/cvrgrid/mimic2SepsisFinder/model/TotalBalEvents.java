@@ -6,13 +6,14 @@ public class TotalBalEvents {
 	private String charttime;
 	private String label;
 	private String cumvolume;
-	private boolean shockFlag;
+	private boolean shockFlag, shockFlagNull;
 
 	public TotalBalEvents() {
 		setSubject_id("s");
 		setCharttime("");
 		setLabel("");
 		setShockFlag(false);
+		setShockFlagNull(false);
 	}
 
 	public String getSubject_id() {
@@ -54,6 +55,14 @@ public class TotalBalEvents {
 
 	public void setShockFlag(boolean shockFlag) {
 		this.shockFlag = shockFlag;
+	}
+
+	public boolean isShockFlagNull() {
+		return shockFlagNull;
+	}
+
+	public void setShockFlagNull(boolean shockFlagNull) {
+		this.shockFlagNull = shockFlagNull;
 	}
 
 	private void shockCheck() {
